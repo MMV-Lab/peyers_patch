@@ -1,0 +1,47 @@
+
+# everything about data
+data:
+  # data_path: "/mnt/data/xyz.csv"
+  # data_column: "raw_path"
+  spatial_dims: 3
+  input: 
+    dir: "/mnt/eternus/users/Sai/paired_data/segmentation_final_test_data/T_cells/additional_data"
+    params:
+      data_type: "tiff"
+    reader_params:
+      dimension_order_out: "CZYX"
+      C: [0]
+      T: 0
+  output:
+    path: "/mnt/eternus/users/Sai/paired_data/segmentation_final_predictions/model_3/best_predictions/T_cells/additional_predictions"
+    suffix: "pred_PP"
+  dataloader_params:
+    batch_size: 1
+    num_workers: 1
+  preprocess:
+    - module_name: torchio
+      func_name: ZNormalization
+# model
+model:
+  category: FCN
+  net: 
+    module_name: monai.networks.nets
+    func_name: UNet
+    params:
+      spatial_dims: 3
+      in_channels: 1
+      out_channels: 2
+      channels: [16, 32, 64, 128, 256] 
+      strides: [2, 2, 2, 2]
+      num_res_units: 2
+  sliding_window_params:
+    dims_max: [1, 64, 256, 256]
+    overlaps: [0, 8, 16, 16]
+  ckpt:
+    # checkpoint_path: /mnt/eternus/users/Sai/paired_data/segmentation_checkpoints/best_models_T_cells/unet_model_T_cells_rotation_scaling_2000_with_val_loss_0.21381700038909912_state.ckpt
+    checkpoint_path: /mnt/eternus/users/Sai/mmv_im2im_original/unet_model_3_T_cells_rotation_scaling_1600_with_val_loss_0.23523099720478058_state.ckpt
+    hparams_file: /mnt/eternus/users/Sai/mmv_im2im_dev/lightning_logs/version_5/hparams.yaml
+# inference
+run:
+  gpus: 1
+  precision: 16

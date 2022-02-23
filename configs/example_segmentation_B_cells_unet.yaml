@@ -1,0 +1,97 @@
+
+# everything about data
+data:
+  category: "pair_3d"
+  target_type: "Label" # "Label" or "Image
+  target_reader_params:
+    dimension_order_out: "ZYX"
+    C: 0
+    T: 0
+  source_type: "Image" # "Label" or "Image
+  source_reader_params:
+    dimension_order_out: "ZYX"
+    C: 0
+    T: 0
+  # data_path: "/mnt/data/xyz.csv"
+  data_path: "/mnt/eternus/users/Sai/paired_data/segmentation_training_data/B_cells"
+  # data_path:
+  #   source_path:
+  #   target_path:
+  #   costmap_path: optional
+  #   image_type: "tiff"
+  dataloader_patch_queue:  # where to use IO queue in
+    sampler:
+      name: UniformSampler
+      params:
+        patch_size: [64, 256, 256]
+    params:
+      num_workers: 4
+      max_length: 360
+      samples_per_volume: 8  
+  dataloader_params:
+    train:
+      batch_size: 8
+      pin_memory: True
+      num_workers: 0  # if dataload_path_queue is used, num_workers must be 0 here
+    val:
+      batch_size: 1
+      num_workers: 1
+  train_val_ratio: 0.2
+  preprocess:
+    - module_name: torchio
+      func_name: ZNormalization
+  augmentation:
+    # - module_name: torchio
+    #   func_name: RandomFlip
+    #   params:
+    #     axes: [1, 2]
+    #     flip_probability: 0.5
+   - module_name: torchio
+     func_name: RandomAffine
+     params:
+       scales: [0.9, 1.2]
+       degrees: 15
+    
+# model
+model:
+  category: FCN
+  net: 
+    module_name: monai.networks.nets
+    func_name: UNet
+    params:
+      spatial_dims: 3
+      in_channels: 1
+      out_channels: 2
+      channels: [16, 32, 64, 128, 256] 
+      strides: [2, 2, 2, 2]
+      num_res_units: 2
+      
+  criterion:
+    module_name: monai.losses
+    func_name: DiceCELoss
+    params:
+      softmax: True
+      to_onehot_y: True
+    
+  optimizer:
+    module_name: torch.optim
+    func_name: AdamW
+    params:
+      lr: 0.0001
+  sliding_window_params:
+    dims_max: [1, 64, 256, 256]
+    overlaps: [0, 8, 16, 16]
+
+training:
+  params:
+    gpus: 1
+    precision: 16
+    max_epochs: 5000
+    auto_lr_find: False
+    checkpoint_callback: True
+
+callbacks:
+  module_name: pl_bolts.callbacks
+  func_name: PrintTableMetricsCallback
+
+# checkpoint_path: "/mnt/eternus/users/Sai/paired_data/segmentation_checkpoints/best_models_B_cells/unet_model_B_cells_rotation_scaling_1700_with_val_loss_0.11605121940374374_state.ckpt"
