@@ -3,16 +3,17 @@
 data:
   # data_path: "/mnt/data/xyz.csv"
   # data_column: "raw_path"
+  spatial_dims: 3
   input: 
-    dir: "/mnt/eternus/users/Sai/paired_data/segmentation_final_test_data/B_cells/additional_data"
+    dir: "../B_cells"
     params:
-      data_type: "tiff"
+      data_type: "tif"
     reader_params:
       dimension_order_out: "CZYX"
       C: [0]
       T: 0
   output:
-    path: "/mnt/eternus/users/Sai/paired_data/segmentation_final_predictions/model_4(model_1_finetune)/best_predictions/additional_predictions/with_filters"
+    path: "..-raw_predictions/B_cells"
     suffix: "pred_PP"
   dataloader_params:
     batch_size: 1
