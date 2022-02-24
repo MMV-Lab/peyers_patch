@@ -1,7 +1,7 @@
-
 # everything about data
 data:
-  category: "pair_3d"
+  category: "pair"
+  spatial_dims: 3
   target_type: "Label" # "Label" or "Image
   target_reader_params:
     dimension_order_out: "ZYX"
@@ -93,5 +93,3 @@ training:
 callbacks:
   module_name: pl_bolts.callbacks
   func_name: PrintTableMetricsCallback
-
-# checkpoint_path: "/mnt/eternus/users/Sai/paired_data/segmentation_checkpoints/best_models_B_cells/unet_model_B_cells_rotation_scaling_1700_with_val_loss_0.11605121940374374_state.ckpt"

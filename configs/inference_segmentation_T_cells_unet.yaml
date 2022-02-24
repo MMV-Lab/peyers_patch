@@ -4,15 +4,15 @@ data:
   # data_path: "/mnt/data/xyz.csv"
   # data_column: "raw_path"
   input: 
-    dir: "/mnt/eternus/users/Sai/paired_data/segmentation_final_test_data/T_cells/additional_data"
+    dir: "../T_cells"
     params:
-      data_type: "tiff"
+      data_type: "tif"
     reader_params:
       dimension_order_out: "CZYX"
       C: [0]
       T: 0
   output:
-    path: "/mnt/eternus/users/Sai/paired_data/segmentation_final_predictions/model_3/best_predictions/T_cells/additional_predictions"
+    path: "../raw_predictions/T_cells"
     suffix: "pred_PP"
   dataloader_params:
     batch_size: 1

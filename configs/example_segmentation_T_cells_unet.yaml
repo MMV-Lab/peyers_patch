@@ -1,7 +1,8 @@
 
 # everything about data
 data:
-  category: "pair_3d"
+  category: "pair"
+  spatial_dims: 3
   target_type: "Label" # "Label" or "Image
   target_reader_params:
     dimension_order_out: "ZYX"
@@ -13,7 +14,7 @@ data:
     C: 0
     T: 0
   # data_path: "/mnt/data/xyz.csv"
-  data_path: "/mnt/eternus/users/Sai/paired_data/segmentation_training_data/T_cells"
+  data_path: "../segmentation_training_data/T_cells"
   # data_path:
   #   source_path:
   #   target_path:
