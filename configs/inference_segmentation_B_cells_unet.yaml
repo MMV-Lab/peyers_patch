@@ -38,8 +38,6 @@ model:
     dims_max: [1, 64, 256, 256]
     overlaps: [0, 8, 16, 16]
   ckpt:
-    # checkpoint_path: /mnt/eternus/users/Sai/paired_data/segmentation_checkpoints/best_models_B_cells/unet_model_B_cells_rotation_scaling_1700_with_val_loss_0.11605121940374374_state.ckpt
-    # checkpoint_path: /mnt/eternus/users/Sai/mmv_im2im_original/unet_model_2_B_cells_rotation_scaling_1700_with_val_loss_0.06112760677933693_state.ckpt
     checkpoint_path: /mnt/eternus/users/Sai/mmv_im2im_original/unet_model_4_previous_best_chkpt_1900_with_val_loss_0.07250680029392242_state.ckpt
     hparams_file: /mnt/eternus/users/Sai/mmv_im2im_dev/lightning_logs/version_46/hparams.yaml
 # inference
