@@ -1,16 +1,8 @@
 pandas
-glob
 aicsimageio
 numpy
-os
 yaml
 munch
 scipy
-numpy
 torch
-aicsimageio
-os
-argparse
-sys
-pathlib
 mmv_im2im == 0.1.3
