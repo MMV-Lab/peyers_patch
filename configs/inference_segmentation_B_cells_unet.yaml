@@ -13,7 +13,7 @@ data:
       C: [0]
       T: 0
   output:
-    path: "..-raw_predictions/B_cells"
+    path: "../raw_predictions/B_cells"
     suffix: "pred_PP"
   dataloader_params:
     batch_size: 1
