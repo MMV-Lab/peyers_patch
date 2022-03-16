@@ -49,6 +49,6 @@ This repository contains helper classes to generate segmentation binary maps and
   
   For T cells, to convert raw predictions to binary maps:
   
-  `python main.py --input_dir ../Peyerspatch/raw_predictions/T_cells --output_dir ../Peyerspatch/PP/binary_predictions/T_cells --binary_threshold 0.001 --size_threshold 2000 --num_classes 2 --smoothen_threshold 3 --boundry_buffer_distance 20`
+  `python main.py --input_dir ../Peyerspatch/raw_predictions/T_cells --output_dir ../Peyerspatch/PP/binary_predictions/T_cells --binary_threshold 0.01 --size_threshold 2000 --num_classes 2 --smoothen_threshold 3 --boundry_buffer_distance 20`
   
   After generating the binary predictions, the postprocessing will be completed and the binary predictions in their corresponding folders are generated. Additionally, the evaluation metrics are also estimated and these files are stored in individual folder seperately. A user input is taken weather he/she wants to visualize the metrics together in one excel file or not. If he chooses not to visualize them together, the program is ended and the user can have access to these files.
