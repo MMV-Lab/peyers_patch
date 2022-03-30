@@ -67,7 +67,7 @@ class Args(argparse.Namespace):
 
 
 CH_YAML = "../configs/inference_segmentation_B_cells_unet.yaml"
-EXCEL_FILE = "tumor_sizes.xlsx"
+EXCEL_FILE = "DNase_I_treatment_B_cells_volume.xlsx"
 
 
 def _get_binary_maps(args):
@@ -115,22 +115,23 @@ def main():
     print("Generating binary maps for raw predictions")
     _get_binary_maps(args)
     print("Post processing complete")
-    ch_dataframe = _evaluate_metrics_ch(args, CH_YAML)
-    _save_data(args, ch_dataframe)
-    print("Saved channel metrics as excel")
-    print("Do you want to merge the excel files? \n")
-    merge_file = input("yes/no \n")
-    if merge_file == "yes":
-        ch1_out_dir = input("Enter the output directory of channel 1: ")
-        ch2_out_dir = input("Enter the output directory of channel 2: ")
-        ch1_dataframe = pd.read_excel(os.path.join(ch1_out_dir, EXCEL_FILE))
-        ch2_dataframe = pd.read_excel(os.path.join(ch2_out_dir, EXCEL_FILE))
-        final_dataframe = _merge_dataframes(ch1_dataframe, ch2_dataframe)
-        final_dataframe.to_excel(
-            os.path.join(os.path.commonpath([ch1_out_dir, ch2_out_dir]), EXCEL_FILE)
-        )
-    elif merge_file == "no":
-        sys.exit(0)
+    # ch_dataframe = _evaluate_metrics_ch(args, CH_YAML)
+    # print(ch_dataframe)
+    # _save_data(args, ch_dataframe)
+    # print("Saved channel metrics as excel")
+    # print("Do you want to merge the excel files? \n")
+    # merge_file = input("yes/no \n")
+    # if merge_file == "yes":
+    #     ch1_out_dir = input("Enter the output directory of channel 1: ")
+    #     ch2_out_dir = input("Enter the output directory of channel 2: ")
+    #     ch1_dataframe = pd.read_excel(os.path.join(ch1_out_dir, EXCEL_FILE))
+    #     ch2_dataframe = pd.read_excel(os.path.join(ch2_out_dir, EXCEL_FILE))
+    #     final_dataframe = _merge_dataframes(ch1_dataframe, ch2_dataframe)
+    #     final_dataframe.to_excel(
+    #         os.path.join(os.path.commonpath([ch1_out_dir, ch2_out_dir]), EXCEL_FILE)
+    #     )
+    # elif merge_file == "no":
+    #     sys.exit(0)
 
 
 if __name__ == "__main__":
