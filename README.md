@@ -24,6 +24,8 @@ This repository contains helper classes to generate segmentation binary maps and
 
 ### Example usecase for peyers patch:
 
+- In the peyers patch repository, the overall dataset is divided into three categories Old_data, Heart Ischemia, DNase_I_Treatment. For Old_data it is recommended to use "unet_model_B_cell_segmentation.ckpt" to generate raw predictions. For Heart_Ischemia and DNase_I_Treatment, it is recommended to use "best_unet_modified_4_3_2022_4950_state.ckpt" as the model to generate raw predictions. This is applicable for only B cells. 
+- For T cells, the model "unet_model_T_cell_segmentation.ckpt" can be used to generate the raw predictions. The threshold can be lowered in order to minimize the false predictions when it is being converted to binary maps.
 - With the help of the instructions, use the config files and necessary checkpoints which are available in the config and checkpoints folder of peyers patch. 
   For example, to generate raw predictions for B cells use the checkpoint "unet_model_B_cell_segmentation.ckpt" and "inference_segmentation_B_cells_unet.yaml" as
   below:
